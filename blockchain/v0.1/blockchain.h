@@ -8,6 +8,8 @@
 #include <openssl/sha.h> 
 
 #define BLOCKCHAIN_DATA_MAX 1024
+#define UNUSED(x) (void)(x)
+
 
 typedef struct blockchain_s
 {
@@ -54,3 +56,11 @@ void block_destroy(block_t *block);
 void blockchain_destroy(blockchain_t *blockchain);
 
 uint8_t *block_hash(block_t const *block, uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
+
+int blockchain_serialize(blockchain_t const *blockchain, char const *path);
+
+uint8_t _get_endianness(void);
+
+void _swap_endian(void *p, size_t size);
+
+blockchain_t *blockchain_deserialize(char const *path);
